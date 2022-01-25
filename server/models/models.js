@@ -12,6 +12,10 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,
         unique: true
     },
+    name: {
+        type: DataTypes.STRING,
+        defaultValue: "Yanka"
+    },
     password:{
         type: DataTypes.STRING,
     },
@@ -29,9 +33,25 @@ const Collection = sequelize.define('collection', {
     },
     name:{
         type: DataTypes.STRING,
+        allowNull: false
     },
     description:{
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    img:{
+        type: DataTypes.STRING
+    },
+    author:{
+        type: DataTypes.STRING
+    },
+    addComments:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    private: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 })
 
@@ -43,7 +63,7 @@ const Item = sequelize.define('item', {
     },
     name:{
         type: DataTypes.STRING,
-        unique: true
+        defaultValue: "Item"
     },
     description:{
         type: DataTypes.TEXT

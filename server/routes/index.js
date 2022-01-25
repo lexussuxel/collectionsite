@@ -9,7 +9,6 @@ const itemRouter = require('./itemRouter')
 router.use('/user', userRouter);
 router.use('/item', itemRouter);
 router.use('/collection', collectionRouter);
-router.use('/collection', itemRouter);
 
 
 
