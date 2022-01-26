@@ -11,7 +11,6 @@ import HomePage from "./pages/HomePage";
 import UserPage from "./pages/UserPage";
 import Auth from "./pages/Auth";
 import Collection from "./pages/Collection";
-import Item from "./pages/Item";
 import CreateCollection from "./pages/CreateCollection";
 import CreateItem from "./pages/CreateItem";
 

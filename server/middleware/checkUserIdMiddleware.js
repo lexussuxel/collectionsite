@@ -4,15 +4,15 @@ const {Collection} = require('../models/models')
 module.exports = function(){
     return  async function(req, res, next){
         const id = req.params.id;
-        //console.log(id);
         const collection = await Collection.findOne({where: {id}})
         const userId = collection.userId;
-        //console.log(userId);
         if (req.method === "OPTIONS"){
             next();
         }
         try{
+
             const token = req.headers.authorization.split(' ')[1];
+            console.log(token)
             if(!token){
                 return res.status(401).json({message: "User is not authentificated"});
             }

@@ -5,6 +5,7 @@ class LikeController{
 
     async create(req, res){
         const {userId, collectionId} = req.body;
+        console.log(userId+ " " +collectionId)
         const like = await Like.create({userId, collectionId});
         return res.json(like);
     }

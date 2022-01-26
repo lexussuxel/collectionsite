@@ -1,8 +1,4 @@
 const express = require("express")//,
-//     session = require('express-session'),
-//     fileStore = require('session-file-store')(session),
-//     passport = require('passport'),
-//     localStrategy = require('passport-local').Strategy,
 const fileUpload = require('express-fileupload')
 
 const sequelize = require('./db');
@@ -25,72 +21,19 @@ app.use(express.urlencoded({extended: false}));
 app.use(fileUpload({}));
 
 
+if (process.env.NODE_ENV === "production")
+    app.use(express.static(path.resolve(__dirname, 'static')));
 
+console.log(path.resolve(__dirname, 'static'))
 
-app.use(express.static(path.resolve(__dirname, 'static')));
 app.use('/api', router);
 
 app.use(errorHandler);
-//
-// app.use(
-//     session({
-//         secret: "yana-obezyana",
-//         store: new fileStore(),
-//         cookie: {
-//             path: '/',
-//             httpOnly: true,
-//             maxAge: 60 * 60 * 1000,
-//         },
-//         resave: false,
-//         saveUninitialized: false
-//     })
-// )
-//
-//
-//
-// require('./config-passport');
-// app.use(passport.initialize());
-// //app.use(passport.session);
-//
-// app.post('/login', (req, res, next) => {
-//     console.log("Lalalala");
-//     passport.authenticate('local',{}, function(err, user, info) {
-//         if (err) { return next(err); }
-//         if (!user) { return res.redirect('/login'); }
-//         req.logIn(user, function(err) {
-//             if (err) { return next(err); }
-//             return res.redirect('/users/' + user.username);
-//         });
-//     });
-// })
-//
-// const auth = (req, res, next) => {
-//     if (req.isAuthenticated()){
-//         return next();
-//     }else{
-//        res.redirect('/');
-//     }
-// }
-// app.get('/login', (req, res) => {
-//     res.send('Login page');
-// })
-//
-// app.use('/admin', auth, (req, res) => {jndt
-//     console.log("\n\n\njajajja\n\n\n")
-//     res.send('Admin page');
-// })
-//
-// app.get('/', (req, res) => {
-//     console.log("\n\n\njajajja\n\n\n")
-//     res.send('Home page');
-// })
+
 const start = async () => {
     try{
-        console.log('000');
         await sequelize.authenticate();
-        console.log('111');
         await sequelize.sync();
-        console.log('222');
 
     }catch(e){
 

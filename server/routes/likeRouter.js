@@ -1,7 +1,7 @@
 const Router = require('express');
 const router = new Router();
 const likeController = require('../controllers/likeController');
-const checkId = require('../middleware/checkUserIdMiddleware')
+const checkId = require('../middleware/checkAuthMiddleware')
 
 router.post('/:id/create', checkId(), likeController.create);
 router.get('/:id', likeController.getLikes);
