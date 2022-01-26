@@ -4,7 +4,7 @@ const fileUpload = require('express-fileupload')
 const sequelize = require('./db');
 const mysql = require('mysql2');
 const models = require('./models/models');
-require('dotenv').config();
+require('dotenv').config({path: __dirname + '/.env'});
 const cors = require('cors');
 const router = require('./routes/index');
 const errorHandler = require('./middleware/ErrorHandlingMiddleware');
@@ -12,7 +12,7 @@ const path = require('path');
 
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.use(cors());
 
@@ -24,7 +24,6 @@ app.use(fileUpload({}));
 if (process.env.NODE_ENV === "production")
     app.use(express.static(path.resolve(__dirname, 'static')));
 
-console.log(path.resolve(__dirname, 'static'))
 
 app.use('/api', router);
 
