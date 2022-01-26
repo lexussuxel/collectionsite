@@ -46,8 +46,8 @@ const UserPage = (props) => {
                 <h4>{useUser.email}</h4>
             </div>
             <p>Collections:</p>
-            {collections.map((k, index) =>
-              <OneCollection collection={k} index={index} id={id} deleteCollections={deleteCollections}/>
+            {collections.map((k) =>
+              <OneCollection collection={k} id={id} deleteCollections={deleteCollections}/>
                 )}
 
         </Container>

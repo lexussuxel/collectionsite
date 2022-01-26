@@ -1,8 +1,6 @@
-const {Collection} = require('../models/models')
+const {Collection, Item, Like, Comment} = require('../models/models')
 const ApiError = require('../error/ApiError')
-const itemController = require('./itemController')
-const {Item} = require('../models/models')
-const jwt = require("jsonwebtoken");
+
 const uuid = require("uuid");
 const path = require("path");
 
@@ -44,7 +42,10 @@ class CollectionController{
         if (!collection){
             return res.status(400).json({message:"No collection to delete!"});
         }
-        const collections = Collection.destroy({where: {id}});
+        const collections = await Collection.destroy({where: {id}});
+        await Item.destroy({where: {collectionId: id}});
+        await Like.destroy({where: {collectionId: id}});
+        await Comment.destroy({where: {collectionId: id}});
         res.json(collections);
     }
 

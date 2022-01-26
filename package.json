@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/app.js"
+    "servernpm": "node server/app.js",
+    "client": "npm run start --prefix client",
+    "start": "concurrently \"npm run servernpm \" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",

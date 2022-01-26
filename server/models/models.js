@@ -120,6 +120,11 @@ Comment.belongsTo(User)
 User.hasMany(Like)
 Like.belongsTo(User)
 
+Comment.belongsTo(Collection)
+Collection.hasMany(Comment)
+Collection.hasMany(Like)
+Like.belongsTo(Collection)
+
 Collection.hasMany(Item)
 Item.belongsTo(User)
 
