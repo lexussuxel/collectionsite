@@ -10,11 +10,11 @@ class ItemController{
         const userId = req.user.id;
         const collectionId = req.params.id;
         console.log(userId, collectionId, name, description);
-       // const {img} = req.files;
+        const {img} = req.files;
         let fileName = uuid.v4() + ".jpg";
-        //await img.mv(path.resolve(__dirname,'..','static', fileName));
+        await img.mv(path.resolve(__dirname,'..','static', fileName));
 
-        const item = await Item.create({name, description, collectionId, userId/*, img:fileName*/});
+        const item = await Item.create({name, description, collectionId, userId, img:fileName});
 
         return res.json(item);
         }catch (e){
