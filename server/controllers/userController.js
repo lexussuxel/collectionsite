@@ -54,7 +54,7 @@ class UserController{
 
     async findById(req, res, next){
         const id = req.params.id;
-        const user = await User.findOne({where: {id}});
+        const user = await User.findOne({where: {id}, attributes:['id', 'name', 'email']});
         if (!user) {
             return next(ApiError.internal("User is not found........."));
         }

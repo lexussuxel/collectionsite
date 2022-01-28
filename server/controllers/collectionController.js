@@ -46,7 +46,8 @@ class CollectionController{
         await Item.destroy({where: {collectionId: id}});
         await Like.destroy({where: {collectionId: id}});
         await Comment.destroy({where: {collectionId: id}});
-        res.json(collections);
+        return res.json();
+        //res.json(collections);
     }
 
 }
