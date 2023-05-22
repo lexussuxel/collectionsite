@@ -9,5 +9,6 @@ router.get('/:id/items',itemController.getAll);
 router.delete('/:id/delete/:item', checkId(), itemController.delete)
 //router.get('/:id/items',itemController.getAll);
 //router.get('/:id', itemController.getOne);
+router.get('/last', itemController.getLast);
 
 module.exports = router;

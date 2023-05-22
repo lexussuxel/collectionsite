@@ -1,6 +1,6 @@
 const {Collection, Item, Like, Comment} = require('../models/models')
 const ApiError = require('../error/ApiError')
-
+const sequelize = require("../db")
 const uuid = require("uuid");
 const path = require("path");
 
@@ -48,6 +48,30 @@ class CollectionController{
         await Comment.destroy({where: {collectionId: id}});
         return res.json();
         //res.json(collections);
+    }
+    
+    async updateCollection(req, res){
+        const id = req.params.id;
+        const {name, description, addComments, privatee,} = req.body;
+        const collection = await Collection.update( {name, description, addComments, private: privatee}, {where: {id}})
+        return res.json();
+    }
+
+    async getBiggest(req, res){
+        console.log("aaaaaaaaa afsge faef arf erger gerf ergerg ")
+        const items = await Item.findAll({
+            attributes: [
+              "collectionId",
+              [sequelize.fn("COUNT", sequelize.col("collectionId")), "count"],
+            ],
+            group: "collectionId",
+          })
+        console.log(items[0].getDataValue("count"))
+        const filteredItems = items.sort((i, k)=> k.getDataValue("count") - i.getDataValue("count") )
+        console.log(filteredItems)
+
+        const collection = await Collection.findAll({where: {id:filteredItems[0].getDataValue('collectionId')}})
+        return res.json(collection)
     }
 
 }

@@ -8,6 +8,7 @@ router.get('/user/:id', collectionController.getUserCollections);
 router.get('/all', collectionController.getAll );
 router.get('/:id', collectionController.getOne);
 router.delete('/:id', collectionController.delete);
-
+router.post('/:id', checkRole(['USER', 'ADMIN']),collectionController.updateCollection)
+router.get('/biggest/big', collectionController.getBiggest)
 
 module.exports = router

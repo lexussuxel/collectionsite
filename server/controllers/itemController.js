@@ -13,18 +13,25 @@ class ItemController{
         console.log(userId, collectionId, name, description);
         let fileName;
         try{
+            console.log("ddddddddd")
             const {img} = req.files;
+           // console.log(img)
             fileName = uuid.v4() + ".jpg";
-            await img.mv(path.resolve(__dirname,'..','static', fileName));}
+            console.log("aaaaaaaaa")
+            console.log(path.resolve(__dirname,'..','static'))
+            await img.mv(path.resolve(__dirname,'..','static', fileName), (e)=> console.log(e));
+            console.log("cccccccccccccccc")
+        }
         catch(e){
 
             fileName = "null";
         }
 
         const item = await Item.create({name, description, collectionId, userId, img:fileName});
-
+        
         return res.json(item);
         }catch (e){
+            console.log(e);
             return next(ApiError.badRequest(e));
         }
     }
@@ -50,6 +57,15 @@ class ItemController{
         await Item.destroy({where: {id}})
 
        return res.json();
+    }
+
+    async getLast(req, res){
+        console.log("bbbbb b bb b b")
+        const items = await Item.findAll({
+            limit: 3,
+            
+            order: [ [ 'createdAt', 'DESC' ]]})
+        return res.json(items)
     }
 }
 
